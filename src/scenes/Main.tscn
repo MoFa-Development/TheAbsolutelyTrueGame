@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://images/textures/white-paper-texture-4k-white-crumpled-paper-macro-white-paper.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Fields.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Card.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node2D"]
 scale = Vector2( 0.288394, 0.288394 )
@@ -33,3 +34,6 @@ current = true
 
 [node name="Fields" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2868, 3051.38 )
+
+[node name="Card" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1276.03, 5159.61 )

@@ -1,9 +1,122 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://images/ui/Card/Card.png" type="Texture" id=1]
+[ext_resource path="res://fonts/KGHAPPY.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/JandaManateeSolid.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Node2D
+
+# Animation
+var upscaled = false
+
+# Functioning
+var dragging = false
+var snappingPos = null
+
+
+# Functions
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if  Input.is_action_pressed(\"click\"):
+		dragging = true
+		GameManager.draggingCard = self
+		Input.set_default_cursor_shape(Input.CURSOR_MOVE)
+	else:
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+		dragging = false
+		GameManager.draggingCard = null
+
+func _on_Area2D_mouse_entered():
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+	anim_drag()
+
+func _on_Area2D_mouse_exited():
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+	anim_undrag()
+
+func snapTo(pos : Vector2):
+	snappingPos = pos
+
+func unSnap():
+	snappingPos = null
+
+func _process(delta):
+	if(dragging):
+		global_position = get_global_mouse_position()
+	
+	if snappingPos != null:
+		global_position = snappingPos
+		
+
+# Animations
+
+func anim_drag():
+	upscaled = true
+	$Tween.interpolate_property(self, \"scale\", scale, Vector2(2, 2), 0.3, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	$Tween.start()
+
+func anim_undrag():
+	upscaled = false
+	$Tween.interpolate_property(self, \"scale\", scale, Vector2(1, 1), 0.3, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+	$Tween.start()
+"
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+use_filter = true
+extra_spacing_top = -15
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 368, 608 )
 
 [node name="Card" type="Node2D"]
+script = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 8, -328 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -280.0
+margin_top = -904.0
+margin_right = 296.0
+margin_bottom = -808.0
+custom_fonts/font = SubResource( 1 )
+text = "Card Title"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = -280.0
+margin_top = -184.0
+margin_right = 296.0
+margin_bottom = 248.0
+custom_fonts/font = SubResource( 2 )
+text = "Card text like Lorem Ipsum Dolor site amet kein Plan wie das geht. Dies ist einfach nur ein Platzhalter Text zu ability beschreibung!"
+align = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 8, -328 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
