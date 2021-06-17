@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="TheAbsolutelyTrueCardGame"
+config/name="TheAbsolutelyTrueGame"
 run/main_scene="res://scenes/Main.tscn"
 
 [autoload]
@@ -41,6 +41,7 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
+common/physics_fps=120
 common/enable_pause_aware_picking=true
 
 [rendering]
