@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white-paper-texture-4k-white-crumpled-paper-macro-white-paper.jpg-8b6bf8c808eecd268b036c799cd76750.stex"
+path="res://.import/CardPlaceHolder.png-7df9e4185205aecd3c772a6435b35ae5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/textures/white-paper-texture-4k-white-crumpled-paper-macro-white-paper.jpg"
-dest_files=[ "res://.import/white-paper-texture-4k-white-crumpled-paper-macro-white-paper.jpg-8b6bf8c808eecd268b036c799cd76750.stex" ]
+source_file="res://assets/images/ui/CardPlaceHolder/CardPlaceHolder.png"
+dest_files=[ "res://.import/CardPlaceHolder.png-7df9e4185205aecd3c772a6435b35ae5.stex" ]
 
 [params]
 

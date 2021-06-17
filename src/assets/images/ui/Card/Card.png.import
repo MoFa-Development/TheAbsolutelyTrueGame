@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CardPlaceHolder.png-af93f25a71c381a9ecc847a429b9e895.stex"
+path="res://.import/Card.png-8cb1ebf224d92721c532da20da001451.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/ui/CardPlaceHolder/CardPlaceHolder.png"
-dest_files=[ "res://.import/CardPlaceHolder.png-af93f25a71c381a9ecc847a429b9e895.stex" ]
+source_file="res://assets/images/ui/Card/Card.png"
+dest_files=[ "res://.import/Card.png-8cb1ebf224d92721c532da20da001451.stex" ]
 
 [params]
 
