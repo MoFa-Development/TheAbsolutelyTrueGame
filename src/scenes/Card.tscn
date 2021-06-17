@@ -116,7 +116,6 @@ position = Vector2( 8, -328 )
 shape = SubResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
-
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
