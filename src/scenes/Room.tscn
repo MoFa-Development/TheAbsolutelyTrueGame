@@ -45,7 +45,7 @@ func _process(delta):
 		var result = space_state.intersect_ray( from, to )
 		
 		if result.size() > 0:
-			book.apply_impulse(Vector3(rand_range(0, 0.1), rand_range(0, 0.1), rand_range(0, 0.1)), (result.position - book.global_transform.origin) * forceFactor)
+			book.apply_impulse(Vector3(rand_range(0, 0.03), rand_range(0, 0.03), rand_range(0, 0.03)), (result.position - book.global_transform.origin) * forceFactor)
 "
 
 [sub_resource type="SpatialMaterial" id=3]
