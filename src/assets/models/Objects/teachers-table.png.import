@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/teachers-table.png-b24e0014b3a337604e4f602bb648d00a.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/models/Objects/teachers-table.png"
+dest_files=[ "res://.import/teachers-table.png-b24e0014b3a337604e4f602bb648d00a.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=1
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

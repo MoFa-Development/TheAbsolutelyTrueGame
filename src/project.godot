@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="TheAbsolutelyTrueGame"
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://scenes/Room.tscn"
 config/icon="res://assets/images/ui/icon.png"
 
 [autoload]
@@ -79,4 +79,3 @@ quality/intended_usage/framebuffer_allocation.mobile=2
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.113725, 0.0431373, 0.211765, 1 )
-environment/default_environment="res://environment/Editor.tres"

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/teachers-table.obj-9e5653b1068b1aae5c85aa2461629803.mesh"
+
+[deps]
+
+files=[ "res://.import/teachers-table.obj-9e5653b1068b1aae5c85aa2461629803.mesh" ]
+
+source_file="res://assets/models/Objects/teachers-table.obj"
+dest_files=[ "res://.import/teachers-table.obj-9e5653b1068b1aae5c85aa2461629803.mesh", "res://.import/teachers-table.obj-9e5653b1068b1aae5c85aa2461629803.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

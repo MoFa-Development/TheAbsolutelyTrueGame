@@ -1,37 +1,103 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/models/MrP/MrP.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://assets/models/MrP/MrP.png" type="Texture" id=2]
 [ext_resource path="res://environment/Main.tres" type="Environment" id=3]
-[ext_resource path="res://assets/models/BG/BG.obj" type="ArrayMesh" id=4]
-[ext_resource path="res://assets/models/BG/BG.png" type="Texture" id=5]
+[ext_resource path="res://assets/models/Objects/board.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://assets/models/Classroom/empty-classroom.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/models/Classroom/empty-classroom.png" type="Texture" id=6]
+[ext_resource path="res://assets/models/Objects/board.png" type="Texture" id=7]
+[ext_resource path="res://assets/models/Objects/teachers-table.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://assets/models/Objects/lamp.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://assets/models/Objects/teachers-table.png" type="Texture" id=10]
+[ext_resource path="res://assets/models/Objects/lamp.png" type="Texture" id=11]
+[ext_resource path="res://assets/models/Objects/lamp-emission.png" type="Texture" id=12]
+[ext_resource path="res://assets/models/Objects/plant.obj" type="ArrayMesh" id=13]
+[ext_resource path="res://assets/models/Objects/plant.png" type="Texture" id=14]
+[ext_resource path="res://assets/models/Objects/table.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://assets/models/Objects/table.png" type="Texture" id=16]
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 16 )
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 2 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 7 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 11 )
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 0.26
+emission_operator = 0
+emission_on_uv2 = false
+emission_texture = ExtResource( 12 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 10 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 14 )
 
 [node name="Room" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.866025, 0.0783809, -0.493818, 0, 0.987636, 0.156762, 0.5, -0.13576, 0.855318, -3.6, 4.93208, 2.72707 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.181745, 3.30279, 2.62146 )
 environment = ExtResource( 3 )
 current = true
+near = 1.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.931158, 0.153938, 0.330528, -0.272563, 0.895999, 0.350564, -0.242187, -0.41652, 0.876274, 10.8361, 5.47195, 7.21686 )
+light_energy = 0.83
+light_indirect_energy = 0.14
+
+[node name="table3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60658, 0.304015, -1.5113 )
+mesh = ExtResource( 15 )
+material/0 = SubResource( 7 )
+
+[node name="table2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14975, 0.202677, -1.42618 )
+mesh = ExtResource( 15 )
+material/0 = SubResource( 7 )
+
+[node name="table" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55542, 0.101338, -1.3742 )
+mesh = ExtResource( 15 )
+material/0 = SubResource( 7 )
 
 [node name="MrP" type="MeshInstance" parent="."]
-transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -0.8, 0.914152, -3.2 )
+transform = Transform( 0.908711, 0, 0.417423, 0, 1, 0, -0.417423, 0, 0.908711, -2.26071, 0.14, -10 )
 mesh = ExtResource( 1 )
 material/0 = SubResource( 1 )
 
-[node name="BG" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.63813, -6.52456 )
-mesh = ExtResource( 4 )
+[node name="empty-classroom" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
+mesh = ExtResource( 5 )
 material/0 = SubResource( 2 )
 
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44, 6.06, -6.22 )
-light_color = Color( 0.741176, 0.741176, 0.309804, 1 )
-light_energy = 2.58
-shadow_enabled = true
-omni_range = 9.2
+[node name="board" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43193, 2.90782, -12.5122 )
+mesh = ExtResource( 4 )
+material/0 = SubResource( 3 )
+
+[node name="lamp" type="MeshInstance" parent="."]
+transform = Transform( 0.998431, -0.00877797, 0.0553032, 0.00759462, 0.999738, 0.0215715, -0.0554781, -0.0211176, 0.998236, -0.7779, 5.82146, -4.62916 )
+mesh = ExtResource( 9 )
+material/0 = SubResource( 5 )
+
+[node name="teachers-table" type="MeshInstance" parent="."]
+transform = Transform( 0.998431, -0.00877797, 0.0553032, 0.00759462, 0.999738, 0.0215715, -0.0554781, -0.0211176, 0.998236, -0.97308, 0.0747369, -7.2462 )
+mesh = ExtResource( 8 )
+material/0 = SubResource( 4 )
+
+[node name="plant" type="MeshInstance" parent="."]
+transform = Transform( 0.965626, 0, 0.259931, 0, 1, 0, -0.259931, 0, 0.965626, -0.660249, 1.76441, -7.13175 )
+mesh = ExtResource( 13 )
+material/0 = SubResource( 6 )
