@@ -3,54 +3,55 @@
 [ext_resource path="res://assets/models/Objects/table.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://assets/models/Objects/table.png" type="Texture" id=2]
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 2 )
 
-[sub_resource type="ConvexPolygonShape" id=1]
+[sub_resource type="ConvexPolygonShape" id=2]
 points = PoolVector3Array( 2.48034, 1.5, -0.311381, 2.48034, 1.5, -0.084011, 2.48761, -0.0130164, -0.304108, 2.48761, -0.0130164, -0.0912844, 2.69174, 0.0468973, -0.1, 2.69635, 0.0152208, -0.3, 2.69635, 1.42176, -0.3, 2.70773, 1.5, -0.084011 )
 
-[sub_resource type="ConvexPolygonShape" id=2]
+[sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( 0.192289, 1.5, -0.084011, 0.20367, 0.0152208, -0.3, 0.20367, 1.42176, -0.3, 0.208278, 0.0468973, -0.1, 0.412385, -0.0130164, -0.304108, 0.412385, -0.0130164, -0.0912844, 0.419659, 1.5, -0.311381, 0.419659, 1.5, -0.084011 )
 
-[sub_resource type="ConvexPolygonShape" id=3]
+[sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( 2.48034, 1.5, -2.01415, 2.48034, 1.5, -1.78676, 2.48761, -0.0130164, -2.00688, 2.48761, -0.0130164, -1.79404, 2.69358, 0.0342795, -2, 2.69358, 1.4027, -2, 2.6945, 0.0279734, -1.8, 2.6945, 1.40901, -1.8 )
 
-[sub_resource type="ConvexPolygonShape" id=4]
+[sub_resource type="ConvexPolygonShape" id=5]
 points = PoolVector3Array( 0.205525, 0.0279734, -1.8, 0.205525, 1.40901, -1.8, 0.206442, 0.0342795, -2, 0.206442, 1.4027, -2, 0.412385, -0.0130164, -2.00688, 0.412385, -0.0130164, -1.79404, 0.419659, 1.5, -2.01415, 0.419659, 1.5, -1.78676 )
 
-[sub_resource type="ConvexPolygonShape" id=5]
+[sub_resource type="ConvexPolygonShape" id=6]
 points = PoolVector3Array( -0.0133028, 1.47664, -0.729816, -0.0133028, 1.47664, 0.0151376, -0.0133028, 1.71603, -0.729816, -0.0133028, 1.71603, 0.0151376, 0.199546, 1.45003, -0.304253, 0.239988, 1.45433, -0.1, 2.65973, 1.45433, -0.1, 2.70017, 1.45003, -0.304253, 2.9133, 1.47664, -0.729816, 2.9133, 1.47664, 0.0151376, 2.9133, 1.71603, -0.729816, 2.9133, 1.71603, 0.0151376 )
 
-[sub_resource type="ConvexPolygonShape" id=6]
+[sub_resource type="ConvexPolygonShape" id=7]
 points = PoolVector3Array( -0.0133027, 1.47664, -2.11317, -0.0133027, 1.47664, -0.730087, -0.0133027, 1.71603, -2.11317, -0.0133027, 1.71603, -0.730087, 0.199833, 1.45003, -1.79387, 0.214223, 1.45156, -2, 2.68578, 1.45156, -2, 2.70017, 1.45003, -1.79387, 2.9133, 1.47664, -2.11317, 2.9133, 1.47664, -0.730087, 2.9133, 1.71603, -2.11317, 2.9133, 1.71603, -0.730087 )
 
 [node name="Table" type="RigidBody"]
+mass = 29.9
 
 [node name="table" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1 )
 mesh = ExtResource( 1 )
-material/0 = SubResource( 7 )
+material/0 = SubResource( 1 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, 1 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
