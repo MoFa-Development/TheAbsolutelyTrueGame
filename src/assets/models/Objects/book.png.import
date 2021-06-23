@@ -23,7 +23,11 @@ flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
+<<<<<<< HEAD
 flags/srgb=2
+=======
+flags/srgb=1
+>>>>>>> 4af7769f6e51512a9f15ac1c7df0991bda49b48f
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
