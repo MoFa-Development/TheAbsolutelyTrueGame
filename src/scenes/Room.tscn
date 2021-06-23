@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/models/MrP/MrP.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://assets/models/MrP/MrP.png" type="Texture" id=2]
@@ -12,14 +12,16 @@
 [ext_resource path="res://scenes/furniture/Plant.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/models/Objects/lamp.png" type="Texture" id=11]
 [ext_resource path="res://assets/models/Objects/lamp-emission.png" type="Texture" id=12]
-[ext_resource path="res://assets/models/Objects/table.obj" type="ArrayMesh" id=15]
-[ext_resource path="res://assets/models/Objects/table.png" type="Texture" id=16]
+[ext_resource path="res://scenes/book.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/furniture/TeacherTable.tscn" type="PackedScene" id=14]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera
 
 
+var forceFactor = 2
 onready var goalPos = global_transform.origin.x
+
 
 func _process(delta):
 	if Input.is_action_pressed(\"ui_left\"):
@@ -27,11 +29,24 @@ func _process(delta):
 	if Input.is_action_pressed(\"ui_right\"):
 		goalPos += 0.1
 	global_transform.origin.x = lerp(global_transform.origin.x, goalPos, 0.3)
-	print(get_parent().get_node(\"Table\").global_transform.origin)
-"
 
-[sub_resource type="SpatialMaterial" id=2]
-albedo_texture = ExtResource( 16 )
+	if get_viewport().get_mouse_position() != null && Input.is_action_just_pressed(\"click\"):
+		var book = load(\"res://scenes/book.tscn\").instance() as RigidBody
+		get_parent().add_child(book)
+		book.global_transform.origin = global_transform.origin
+		book.transform.rotated(Vector3(rand_range(0, 20), rand_range(0, 60), rand_range(0, 60)), rand_range(0, 0.01))
+		
+		var ray_length = 1000
+		var mouse_pos = get_viewport().get_mouse_position()
+		var from = project_ray_origin(mouse_pos)
+		var to = from + project_ray_normal(mouse_pos) * ray_length
+		
+		var space_state = get_world().get_direct_space_state()
+		var result = space_state.intersect_ray( from, to )
+		
+		if result.size() > 0:
+			book.apply_impulse(Vector3(rand_range(0, 0.1), rand_range(0, 0.1), rand_range(0, 0.1)), (result.position - book.global_transform.origin) * forceFactor)
+"
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_texture = ExtResource( 6 )
@@ -63,21 +78,6 @@ current = true
 near = 1.0
 script = SubResource( 1 )
 
-[node name="table3" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60658, 0.304015, -1.5113 )
-mesh = ExtResource( 15 )
-material/0 = SubResource( 2 )
-
-[node name="table2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14975, 0.202677, -1.42618 )
-mesh = ExtResource( 15 )
-material/0 = SubResource( 2 )
-
-[node name="table" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55542, 0.101338, -1.3742 )
-mesh = ExtResource( 15 )
-material/0 = SubResource( 2 )
-
 [node name="StaticBody" type="StaticBody" parent="."]
 
 [node name="empty-classroom" type="MeshInstance" parent="StaticBody"]
@@ -87,6 +87,22 @@ material/0 = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -7.4 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -7.4 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -6.8, 0, -7.4 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticBody"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 7.6, 0, -7.4 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="StaticBody"]
+transform = Transform( -1.77636e-15, 2.98023e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, 2.98023e-08, 0.2, 0, -13.4 )
 shape = SubResource( 4 )
 
 [node name="MrP" type="MeshInstance" parent="."]
@@ -138,5 +154,17 @@ shadow_enabled = true
 omni_range = 14.9
 omni_attenuation = 0.840897
 
-[node name="Table" parent="." instance=ExtResource( 8 )]
+[node name="Table" parent="." instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.4, -8.2 )
+
+[node name="book" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -2.6 )
+
+[node name="Table2" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.2, -2.4 )
+
+[node name="Table3" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.2, -2.6 )
+
+[node name="Table4" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0.2, -2.4 )
