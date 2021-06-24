@@ -1,7 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://assets/models/MrP/MrP.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://assets/models/MrP/MrP.png" type="Texture" id=2]
+[ext_resource path="res://scenes/characters/MrP.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/Main.tres" type="Environment" id=3]
 [ext_resource path="res://assets/models/Objects/board.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://assets/models/Classroom/empty-classroom.obj" type="ArrayMesh" id=5]
@@ -10,18 +9,21 @@
 [ext_resource path="res://scenes/furniture/Table.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/furniture/Lamp.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/furniture/Plant.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/fonts/KGHAPPY.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/book.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/furniture/TeacherTable.tscn" type="PackedScene" id=14]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera
 
+onready var book = preload(\"res://scenes/book.tscn\") as PackedScene
 
-var forceFactor = 2
+var forceFactor = 3
 onready var goalPos = global_transform.origin.x
 
 
 func _process(delta):
+	$CanvasLayer/Label.text = str(Engine.get_frames_per_second())
 	if Input.is_action_pressed(\"ui_left\"):
 		goalPos -= 0.1
 	if Input.is_action_pressed(\"ui_right\"):
@@ -29,10 +31,10 @@ func _process(delta):
 	global_transform.origin.x = lerp(global_transform.origin.x, goalPos, 0.3)
 
 	if get_viewport().get_mouse_position() != null && Input.is_action_just_pressed(\"click\"):
-		var book = load(\"res://scenes/book.tscn\").instance() as RigidBody
-		get_parent().add_child(book)
-		book.global_transform.origin = global_transform.origin
-		book.transform.rotated(Vector3(rand_range(0, 20), rand_range(0, 60), rand_range(0, 60)), rand_range(0, 0.01))
+		var b = book.instance() as RigidBody
+		get_parent().add_child(b)
+		b.global_transform.origin = global_transform.origin
+		b.transform.rotated(Vector3(rand_range(0, 20), rand_range(0, 60), rand_range(0, 60)), rand_range(0, 0.01))
 		
 		var ray_length = 1000
 		var mouse_pos = get_viewport().get_mouse_position()
@@ -43,17 +45,18 @@ func _process(delta):
 		var result = space_state.intersect_ray( from, to )
 		
 		if result.size() > 0:
-			book.apply_impulse(Vector3(rand_range(-0.03, 0.03), rand_range(-0.03, 0.03), rand_range(-0.03, 0.03)), (result.position - book.global_transform.origin) * forceFactor)
+			b.apply_impulse(Vector3(rand_range(-0.03, 0.03), rand_range(-0.03, 0.03), rand_range(-0.03, 0.03)), (result.position - b.global_transform.origin) * forceFactor)
 "
+
+[sub_resource type="DynamicFont" id=6]
+size = 100
+font_data = ExtResource( 11 )
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 6 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 7.2, 1, 7.4 )
-
-[sub_resource type="SpatialMaterial" id=4]
-albedo_texture = ExtResource( 2 )
 
 [sub_resource type="SpatialMaterial" id=5]
 albedo_texture = ExtResource( 7 )
@@ -66,6 +69,19 @@ environment = ExtResource( 3 )
 current = true
 near = 1.0
 script = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+
+[node name="Label" type="Label" parent="Camera/CanvasLayer"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 20.0
+margin_bottom = 169.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StaticBody" type="StaticBody" parent="."]
 
@@ -93,11 +109,6 @@ shape = SubResource( 3 )
 [node name="CollisionShape4" type="CollisionShape" parent="StaticBody"]
 transform = Transform( -1.77636e-15, 2.98023e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, 2.98023e-08, 0.2, 0, -13.4 )
 shape = SubResource( 3 )
-
-[node name="MrP" type="MeshInstance" parent="."]
-transform = Transform( 0.908711, 0, 0.417423, 0, 1, 0, -0.417423, 0, 0.908711, -2.26071, 0.14, -10 )
-mesh = ExtResource( 1 )
-material/0 = SubResource( 4 )
 
 [node name="board" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43193, 2.90782, -12.5122 )
@@ -144,3 +155,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.2, -2.6 )
 
 [node name="Table4" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0.2, -2.4 )
+
+[node name="MrP" parent="." instance=ExtResource( 1 )]

@@ -27,8 +27,8 @@ GameManager="*res://scripts/autoload/GameManager.gd"
 
 [display]
 
-window/size/width=128
-window/size/height=72
+window/size/width=1152
+window/size/height=648
 window/size/fullscreen=true
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep_height"
@@ -75,7 +75,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation.mobile=2
 vram_compression/import_etc=true
