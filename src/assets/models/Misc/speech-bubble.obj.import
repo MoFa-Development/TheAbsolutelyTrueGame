@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/speech-bubble.obj-297b70479467adce5b254a2e56feee3c.mesh"
+
+[deps]
+
+files=[ "res://.import/speech-bubble.obj-297b70479467adce5b254a2e56feee3c.mesh" ]
+
+source_file="res://assets/models/Misc/speech-bubble.obj"
+dest_files=[ "res://.import/speech-bubble.obj-297b70479467adce5b254a2e56feee3c.mesh", "res://.import/speech-bubble.obj-297b70479467adce5b254a2e56feee3c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
