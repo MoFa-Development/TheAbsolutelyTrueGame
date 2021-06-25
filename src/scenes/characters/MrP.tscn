@@ -13,7 +13,7 @@ var move = true
 
 func _on_Timer_timeout():
 	if move:
-		goalDir = transform.origin.direction_to($RayCast.cast_to)
+		goalDir = global_transform.origin.direction_to($RayCast.cast_to)
 		move = false
 		
 	else:
