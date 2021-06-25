@@ -40,11 +40,17 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1.3 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
-"args": [ 3, 200 ],
-"method": "move_forward"
+"args": [ 5, 100 ],
+"method": "do_move"
+}, {
+"args": [ 90 ],
+"method": "do_rotate"
+}, {
+"args": [ -100 ],
+"method": "do_rotate"
 } ]
 }
 
@@ -186,7 +192,7 @@ transform = Transform( 0.992437, 0, 0.122753, 0, 1, 0, -0.122753, 0, 0.992437, -
 transform = Transform( 0.948689, 0, -0.316212, 0, 1, 0, 0.316212, 0, 0.948689, -5.25499, 1, -0.930576 )
 
 [node name="MrP" parent="." instance=ExtResource( 1 )]
-transform = Transform( 0.905672, 0, 0.423978, 0, 1, 0, -0.423978, 0, 0.905672, -3.03158, 0, -9.30065 )
+transform = Transform( 0.905672, 0, 0.423978, 0, 1, 0, -0.423978, 0, 0.905672, -3.03158, 0.34, -9.30065 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "MrPWalk"
