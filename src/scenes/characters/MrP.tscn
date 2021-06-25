@@ -6,29 +6,25 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody
 
-onready var goalDir = Vector3(0, 0, 0)
-onready var goalRot = rotation.y
+onready var goalRot = rotation_degrees.y
+var goalDir = Vector3(0, 0, 0)
+var distance = 0
 
-var move = true
-
-func _on_Timer_timeout():
-	if move:
-		goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * 2
-		goalDir.y = 0
-		move = false
-		goalRot = rotation.y
-	else:
-		goalRot = rand_range(-5, 5)
-		move = true
-		goalDir = Vector3.ZERO
-		print(\"-------------\")
-		print(\"rotation.y: \" + str(rotation.y))
-		print(\"goalRot: \" + str(goalRot))
 
 func _process(delta):
-	move_and_slide(goalDir)
-	rotation.y = lerp(rotation.y, goalRot, 0.5)
-	
+	if goalDir > Vector3.ZERO && distance > 0:
+		goalDir.y = 0
+		move_and_slide(goalDir)
+		distance -= 1
+	if rotation_degrees.y - goalRot > 0:
+		rotation_degrees.y = lerp(rotation_degrees.y, goalRot, 0.1)
+
+func move_forward(speed, distance):
+	goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * speed
+	self.distance = distance
+
+func do_rotate(degrees):
+	goalRot = degrees
 "
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -51,9 +47,3 @@ shape = SubResource( 3 )
 
 [node name="Position3D" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.376, 1 )
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
