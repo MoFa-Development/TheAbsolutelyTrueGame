@@ -33,30 +33,6 @@ extents = Vector3( 13.2472, 1, 13.8303 )
 [sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 7 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "MrPWalk"
-length = 5.0
-tracks/0/type = "method"
-tracks/0/path = NodePath("MrP")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.3, 0.6, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"values": [ {
-"args": [ 5, 100 ],
-"method": "do_move"
-}, {
-"args": [ 90 ],
-"method": "do_rotate"
-}, {
-"args": [ -100 ],
-"method": "do_rotate"
-} ]
-}
-
 [node name="Room" type="Spatial"]
 
 [node name="Camera" parent="." instance=ExtResource( 3 )]
@@ -144,7 +120,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04425, 1.4, -9.21187 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.114, -2.534 )
 
 [node name="Shelf" parent="Objects" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6392, 0, -11.7605 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4197, 0.12, -11.9147 )
 
 [node name="Tables" type="Spatial" parent="Objects"]
 
@@ -206,7 +182,3 @@ transform = Transform( 0.963537, 0, 0.267575, 0, 1, 0, -0.267575, 0, 0.963537, 4
 
 [node name="MrP" parent="." instance=ExtResource( 1 )]
 transform = Transform( 0.905672, 0, 0.423978, 0, 1, 0, -0.423978, 0, 0.905672, -3.03158, 0.34, -9.30065 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "MrPWalk"
-anims/MrPWalk = SubResource( 5 )
