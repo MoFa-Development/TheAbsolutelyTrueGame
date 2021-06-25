@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/KGHAPPY.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://environment/Main.tres" type="Environment" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Camera
+
+onready var book = preload(\"res://scenes/book.tscn\") as PackedScene
+
+var forceFactor = 3
+onready var goalPos = global_transform.origin.x
+
+
+func _process(delta):
+	$CanvasLayer/Label.text = str(Engine.get_frames_per_second())
+	if Input.is_action_pressed(\"ui_left\"):
+		goalPos -= 0.1
+	if Input.is_action_pressed(\"ui_right\"):
+		goalPos += 0.1
+	global_transform.origin.x = lerp(global_transform.origin.x, goalPos, 0.3)
+
+	if get_viewport().get_mouse_position() != null && Input.is_action_just_pressed(\"click\"):
+		var b = book.instance() as RigidBody
+		get_parent().add_child(b)
+		b.global_transform.origin = global_transform.origin
+		b.transform.rotated(Vector3(rand_range(0, 20), rand_range(0, 60), rand_range(0, 60)).normalized(), rand_range(0, 0.01))
+		
+		var ray_length = 1000
+		var mouse_pos = get_viewport().get_mouse_position()
+		var from = project_ray_origin(mouse_pos)
+		var to = from + project_ray_normal(mouse_pos) * ray_length
+		
+		var space_state = get_world().get_direct_space_state()
+		var result = space_state.intersect_ray( from, to )
+		
+		if result.size() > 0:
+			b.apply_impulse(Vector3(rand_range(-0.03, 0.03), rand_range(-0.03, 0.03), rand_range(-0.03, 0.03)), (result.position - b.global_transform.origin) * forceFactor)
+"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = ExtResource( 1 )
+
+[node name="Camera" type="Camera"]
+transform = Transform( 0.987345, 7.47255e-05, -0.158589, 0, 1, 0.00047119, 0.158589, -0.000465227, 0.987345, -4.97291, 3.18984, 4.77936 )
+environment = ExtResource( 2 )
+current = true
+near = 1.0
+script = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 20.0
+margin_bottom = 169.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
