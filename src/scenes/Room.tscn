@@ -55,8 +55,6 @@ font_data = ExtResource( 11 )
 [sub_resource type="SpatialMaterial" id=3]
 flags_transparent = true
 albedo_texture = ExtResource( 6 )
-anisotropy_enabled = true
-anisotropy = 0.21
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 7.2, 1, 7.4 )
