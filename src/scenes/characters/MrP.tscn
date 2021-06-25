@@ -15,13 +15,14 @@ func _on_Timer_timeout():
 	if move:
 		goalDir = global_transform.origin.direction_to($RayCast.cast_to)
 		move = false
-		
+		goalRot = rotation.y
 	else:
 		goalRot = rand_range(-5, 5)
 		move = true
 		goalDir = Vector3.ZERO
 
 func _process(delta):
+	print(goalDir)
 	move_and_slide(goalDir)
 	rotation.y = lerp(rotation.y, goalRot, 0.2)
 "
