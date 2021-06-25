@@ -13,7 +13,8 @@ var move = true
 
 func _on_Timer_timeout():
 	if move:
-		goalDir = global_transform.origin.direction_to($RayCast.cast_to)
+		goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * 2
+		goalDir.y = 0
 		move = false
 		goalRot = rotation.y
 	else:
@@ -22,9 +23,8 @@ func _on_Timer_timeout():
 		goalDir = Vector3.ZERO
 
 func _process(delta):
-	print(goalDir)
 	move_and_slide(goalDir)
-	rotation.y = lerp(rotation.y, goalRot, 0.2)
+	rotation.y = lerp(rotation.y, goalRot, 0.5)
 "
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -45,12 +45,10 @@ material/0 = SubResource( 2 )
 transform = Transform( 0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0 )
 shape = SubResource( 3 )
 
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.376, 1 )
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
-
-[node name="RayCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.376, 0 )
-enabled = true
-cast_to = Vector3( 0, 0, 1 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
