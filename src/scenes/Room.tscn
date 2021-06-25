@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/characters/MrP.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/Classroom/window.png" type="Texture" id=2]
