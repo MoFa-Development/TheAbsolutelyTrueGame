@@ -21,10 +21,14 @@ func _on_Timer_timeout():
 		goalRot = rand_range(-5, 5)
 		move = true
 		goalDir = Vector3.ZERO
+		print(\"-------------\")
+		print(\"rotation.y: \" + str(rotation.y))
+		print(\"goalRot: \" + str(goalRot))
 
 func _process(delta):
 	move_and_slide(goalDir)
 	rotation.y = lerp(rotation.y, goalRot, 0.5)
+	
 "
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -51,4 +55,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.376, 1 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
 autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

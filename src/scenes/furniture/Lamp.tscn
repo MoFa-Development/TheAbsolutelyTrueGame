@@ -31,7 +31,7 @@ disabled = true
 [node name="Joint" type="ConeTwistJoint" parent="."]
 nodes/node_a = NodePath("../StaticBody")
 nodes/node_b = NodePath("../RigidBody")
-swing_span = 13.5
+swing_span = 30.1
 bias = 0.01
 softness = 1.0
 

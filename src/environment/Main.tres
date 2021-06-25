@@ -1,8 +1,10 @@
 [gd_resource type="Environment" load_steps=3 format=2]
 
-[ext_resource path="res://assets/images/backgrounds/skybox.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/images/backgrounds/009-hdri-skies.jpg" type="Texture" id=1]
 
 [sub_resource type="PanoramaSky" id=1]
+resource_local_to_scene = true
+radiance_size = 3
 panorama = ExtResource( 1 )
 
 [resource]

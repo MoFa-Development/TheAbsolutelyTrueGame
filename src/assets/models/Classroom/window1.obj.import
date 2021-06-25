@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/window1.obj-40108e327bede4a584bf4724a4c1db8c.mesh"
+
+[deps]
+
+files=[ "res://.import/window1.obj-40108e327bede4a584bf4724a4c1db8c.mesh" ]
+
+source_file="res://assets/models/Classroom/window1.obj"
+dest_files=[ "res://.import/window1.obj-40108e327bede4a584bf4724a4c1db8c.mesh", "res://.import/window1.obj-40108e327bede4a584bf4724a4c1db8c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
