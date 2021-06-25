@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/characters/MrP.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/Classroom/window.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/furniture/Lamp.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/furniture/Plant.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/furniture/Chair.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/furniture/Pen_Holder.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/book.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/furniture/TeacherTable.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/models/Classroom/empty-classroom.png" type="Texture" id=15]
@@ -127,17 +128,21 @@ material/0 = SubResource( 4 )
 [node name="Lamp" parent="Objects" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.41265, 7.10825, -8.76582 )
 
+[node name="Pen_Holder" parent="Objects" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.56669, 2.50311, -8.35346 )
+
 [node name="Plant" parent="Objects" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 2.22862, -8.22832 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.644247, 2.22862, -9.24019 )
+mass = 4.48
 
 [node name="Table" parent="Objects" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.4, -8.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04425, 1.4, -9.21187 )
 
 [node name="Book" parent="Objects" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.114, -2.534 )
 
 [node name="Shelf" parent="Objects" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5597, 0, -11.9147 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6392, 0, -11.7605 )
 
 [node name="Tables" type="Spatial" parent="Objects"]
 
