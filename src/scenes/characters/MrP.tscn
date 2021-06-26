@@ -30,8 +30,6 @@ func _process(delta):
 		rotation_degrees.y = lerp(rotation_degrees.y, goalRot, 0.05)
 		if update_walk:
 			goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * speed
-	
-	v += _apply_gravity()
 	move_and_slide(v)
 	handle_collisions()
 
@@ -42,13 +40,6 @@ func handle_collisions():
 			var c = col.collider as RigidBody
 			c.apply_impulse(col.position, -col.normal)
 
-func _apply_gravity():
-	if not is_on_floor():
-		fall_speed = lerp(fall_speed, gravity, 0.1)
-	else:
-		fall_speed = 0
-	return Vector3(0, fall_speed, 0)
-
 
 func do_move(speed, distance):
 	self.speed = speed
@@ -57,12 +48,11 @@ func do_move(speed, distance):
 
 func do_rotate(degrees, update_walk = true):
 	goalRot = rotation_degrees.y + degrees
-	print(goalRot, rotation_degrees.y)
 	self.update_walk = update_walk
 "
 
-[sub_resource type="GDScript" id=5]
-script/source = "extends Node
+[sub_resource type="GDScript" id=2]
+script/source = "extends Spatial
 
 onready var p = get_parent() as KinematicBody
 
@@ -73,26 +63,32 @@ func _pos() -> Vector3:
 
 
 func _on_Timer_timeout():
+	var speed = 5
+	var rot = 0
 	for ray in get_children():
 		if ray is RayCast:
 			if ray.is_colliding():
-				match ray.name:
-					\"BackRight\":
-						p.do_rotate(-25)
-					\"Right\":
-						p.do_rotate(-40)
-					\"FrontRight\":
-						p.do_rotate(-50)
-					\"Front\":
-						p.do_rotate(180)
-						p.do_move(-5, 50)
-					\"FrontLeft\":
-						p.do_rotate(50)
-					\"Left\":
-						p.do_rotate(40)
-					\"BackLeft\":
-						p.do_rotate(25)
-	p.do_move(5, 50)
+				var dist = global_transform.origin.distance_to(ray.get_collision_point())
+				if ray.name == \"Front\":
+					rot += 90 * dist
+				if ray.name == \"BackRight\":
+					rot += -25 * dist
+				if ray.name == \"Right\":
+					rot += -40 * dist
+				if ray.name == \"FrontRight\":
+					rot += -50 * dist
+				if ray.name == \"FrontLeft\":
+					rot += 50 * dist
+				if ray.name == \"Left\":
+					rot += 40 * dist
+				if ray.name == \"BackLeft\":
+					rot += 25 * dist
+	send_input(speed, rot)
+
+
+func send_input(speed, rot):
+	p.do_rotate(rot)
+	p.do_move(speed, 50)
 "
 
 [sub_resource type="SpatialMaterial" id=3]
@@ -104,51 +100,51 @@ points = PoolVector3Array( -0.6, 2.5, -0.2, -0.6, 2.4, -0.1, -0.6, 2.4, -0.2, -0
 [node name="MrP" type="KinematicBody"]
 script = SubResource( 1 )
 
-[node name="KI" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.983071, 0 )
-script = SubResource( 5 )
+[node name="AI" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783071, 0 )
+script = SubResource( 2 )
 
-[node name="Back" type="RayCast" parent="KI"]
+[node name="Back" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, 2 )
 
-[node name="BackRight" type="RayCast" parent="KI"]
+[node name="BackRight" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( 1.5, 0, 1.5 )
 
-[node name="Right" type="RayCast" parent="KI"]
+[node name="Right" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( 2, 0, 0 )
 
-[node name="FrontRight" type="RayCast" parent="KI"]
+[node name="FrontRight" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( 1.5, 0, -1.5 )
 
-[node name="Front" type="RayCast" parent="KI"]
+[node name="Front" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, -2 )
 
-[node name="FrontLeft" type="RayCast" parent="KI"]
+[node name="FrontLeft" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( -1.5, 0, -1.5 )
 
-[node name="Left" type="RayCast" parent="KI"]
+[node name="Left" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( -2, 0, 0 )
 
-[node name="BackLeft" type="RayCast" parent="KI"]
+[node name="BackLeft" type="RayCast" parent="AI"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72091, 0 )
 enabled = true
 cast_to = Vector3( -1.5, 0, 1.5 )
 
-[node name="Timer" type="Timer" parent="KI"]
+[node name="Timer" type="Timer" parent="AI"]
 wait_time = 0.3
 autostart = true
 
@@ -164,4 +160,4 @@ shape = SubResource( 4 )
 [node name="Position3D" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.376, -1 )
 
-[connection signal="timeout" from="KI/Timer" to="KI" method="_on_Timer_timeout"]
+[connection signal="timeout" from="AI/Timer" to="AI" method="_on_Timer_timeout"]
