@@ -20,7 +20,7 @@ var update_walk = true
 var v = Vector3.ZERO
 
 func _process(delta):
-	if goalDir > Vector3.ZERO && distance > 0:
+	if distance > 0:
 		goalDir.y = 0
 		v = lerp(v, goalDir, 0.1)
 		distance -= 1
@@ -56,7 +56,10 @@ script/source = "extends Spatial
 
 onready var p = get_parent() as KinematicBody
 
-var speed = 5
+var speed = 20
+
+var oldDists1
+var oldDists2
 
 func _pos() -> Vector3:
 	return p.global_transform.origin
@@ -70,15 +73,23 @@ func _on_Timer_timeout():
 			if colliders.size() > 0:
 				var dist = get_dist(area)
 				if area.name == \"Front\":
-					rot = (1 if get_dist($Right) - get_dist($Left) > 0 else -1) * 3 / (dist*dist*dist*dist/1000)
+					if get_dist($Front) > 1:
+						rot = (1 if get_dist($Right) - get_dist($Left) > 0 else -1) * 100 / (dist*dist*dist*dist/1000)
 #				if area.name == \"Right\":
 #					rot += +30 / (dist*dist/10)
 #				if area.name == \"Left\":
 #					rot += -30 / (dist*dist/10)
-	send_input(rot * 10)
+
+	if oldDists1 != null && oldDists2 != null:
+		if get_dist($Right)  == oldDists1 || get_dist($Left) == oldDists1:
+			p.global_transform.origin = Vector3(5,0,5)
+
+	oldDists1 = oldDists2
+	oldDists2 = rot
+	send_input(rot)
 	
 	### DEBUG code ###
-#	print(get_dist($Right), \"   \", get_dist($Left))
+	print(get_dist($Right), \"   \", get_dist($Left))
 #
 #	if rot > 0:
 #		get_parent().get_node(\"MrP\").mesh = CubeMesh.new()
@@ -118,7 +129,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783071, 0 )
 script = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="AI"]
-wait_time = 0.01
+wait_time = 0.3
 autostart = true
 
 [node name="Front" type="Area" parent="AI"]
