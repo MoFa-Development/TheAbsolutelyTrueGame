@@ -58,8 +58,6 @@ onready var p = get_parent() as KinematicBody
 
 var speed = 20
 
-var oldDists1
-var oldDists2
 
 func _pos() -> Vector3:
 	return p.global_transform.origin
@@ -75,21 +73,16 @@ func _on_Timer_timeout():
 				if area.name == \"Front\":
 					if get_dist($Front) > 1:
 						rot = (1 if get_dist($Right) - get_dist($Left) > 0 else -1) * 100 / (dist*dist*dist*dist/1000)
+					if get_dist($Right) == get_dist($Left):
+						rot = 90
 #				if area.name == \"Right\":
 #					rot += +30 / (dist*dist/10)
 #				if area.name == \"Left\":
 #					rot += -30 / (dist*dist/10)
-
-	if oldDists1 != null && oldDists2 != null:
-		if get_dist($Right)  == oldDists1 || get_dist($Left) == oldDists1:
-			p.global_transform.origin = Vector3(5,0,5)
-
-	oldDists1 = oldDists2
-	oldDists2 = rot
 	send_input(rot)
 	
 	### DEBUG code ###
-	print(get_dist($Right), \"   \", get_dist($Left))
+#	print(get_dist($Right), \"   \", get_dist($Left))
 #
 #	if rot > 0:
 #		get_parent().get_node(\"MrP\").mesh = CubeMesh.new()
