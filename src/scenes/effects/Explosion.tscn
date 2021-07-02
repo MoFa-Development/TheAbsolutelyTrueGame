@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0.407955 ), 0.0, 0.0, 0, 0, Vector2( 0.367347, 0.620454 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.165909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 0.22
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, -0.2, 0 )
+initial_velocity = 5.0
+linear_accel = 11.46
+damping = 18.47
+damping_random = 0.27
+angle = 128.4
+angle_random = 0.31
+scale = 0.1
+scale_curve = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_color = Color( 1, 0.788235, 0.235294, 1 )
+emission_enabled = true
+emission = Color( 0.937255, 0.780392, 0.176471, 1 )
+emission_energy = 0.17
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="QuadMesh" id=5]
+material = SubResource( 4 )
+
+[node name="Explosion" type="Spatial"]
+
+[node name="Particles" type="Particles" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.19
+one_shot = true
+preprocess = 0.15
+explosiveness = 0.44
+randomness = 0.16
+visibility_aabb = AABB( -0.751153, -1.64279, -1.19035, 1.50231, 3.28558, 2.3807 )
+draw_order = 2
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 5 )
