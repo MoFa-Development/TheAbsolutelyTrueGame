@@ -56,7 +56,7 @@ script/source = "extends Spatial
 
 onready var p = get_parent() as KinematicBody
 
-var speed = 20
+var speed = 30
 
 
 func _pos() -> Vector3:
@@ -96,14 +96,16 @@ func send_input(rot):
 	p.do_rotate(rot)
 
 func get_dist(area):
-	if area.get_overlapping_bodies().size() > 0:
+	if area.get_overlapping_bodies().size() > 1:
 		return global_transform.origin.distance_to(area.get_overlapping_bodies()[1].global_transform.origin)
+	elif area.get_overlapping_bodies().size() > 0:
+		return global_transform.origin.distance_to(area.get_overlapping_bodies()[0].global_transform.origin)
 	else:
 		return 0
 "
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.001, 1, 3.55613 )
+extents = Vector3( 0.001, 1, 2.12817 )
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.001, 1, 3.55613 )
@@ -128,7 +130,7 @@ autostart = true
 [node name="Front" type="Area" parent="AI"]
 
 [node name="CollisionShape" type="CollisionShape" parent="AI/Front"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.546 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.03554 )
 shape = SubResource( 3 )
 
 [node name="Right" type="Area" parent="AI"]
