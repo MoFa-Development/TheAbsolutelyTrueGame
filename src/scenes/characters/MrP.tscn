@@ -57,12 +57,16 @@ func _on_Area_body_entered(body):
 		if !b.hitted:
 			if b.is_in_group(\"throwable\"):
 				$AnimationPlayer.play(\"Hit\")
+
 "
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Spatial
 
 onready var p = get_parent() as KinematicBody
+onready var initialPos = p.global_transform.origin
+
+var lastPos
 
 var speed = 30
 
@@ -110,6 +114,13 @@ func get_dist(area):
 		return global_transform.origin.distance_to(area.get_overlapping_bodies()[0].global_transform.origin)
 	else:
 		return 0
+
+
+func _on_ResetChecker_timeout():
+	if lastPos != null:
+		if  lastPos.abs() - _pos().abs() < Vector3(0.5, 0.5, 0.5):
+			p.global_transform.origin = initialPos
+	lastPos = _pos()
 "
 
 [sub_resource type="BoxShape" id=3]
@@ -176,6 +187,10 @@ script = SubResource( 2 )
 wait_time = 0.3
 autostart = true
 
+[node name="ResetChecker" type="Timer" parent="AI"]
+wait_time = 8.0
+autostart = true
+
 [node name="Front" type="Area" parent="AI"]
 
 [node name="CollisionShape" type="CollisionShape" parent="AI/Front"]
@@ -215,4 +230,5 @@ anims/Hit = SubResource( 7 )
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.423, 0 )
 shape = SubResource( 8 )
 [connection signal="timeout" from="AI/Timer" to="AI" method="_on_Timer_timeout"]
+[connection signal="timeout" from="AI/ResetChecker" to="AI" method="_on_ResetChecker_timeout"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
