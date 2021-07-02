@@ -10,6 +10,7 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
+
 }
 
 [application]
@@ -79,3 +80,4 @@ quality/intended_usage/framebuffer_allocation.mobile=2
 vram_compression/import_etc=true
 environment/default_clear_color=Color( 0.113725, 0.0431373, 0.211765, 1 )
 quality/filters/msaa=3
+environment/default_environment="res://environment/Main.tres"

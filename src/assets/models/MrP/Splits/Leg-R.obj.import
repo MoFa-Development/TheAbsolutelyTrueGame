@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Leg-R.obj-8b21dea4ebea1d27a6851efdab516ebc.mesh"
+
+[deps]
+
+files=[ "res://.import/Leg-R.obj-8b21dea4ebea1d27a6851efdab516ebc.mesh" ]
+
+source_file="res://assets/models/MrP/Splits/Leg-R.obj"
+dest_files=[ "res://.import/Leg-R.obj-8b21dea4ebea1d27a6851efdab516ebc.mesh", "res://.import/Leg-R.obj-8b21dea4ebea1d27a6851efdab516ebc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
