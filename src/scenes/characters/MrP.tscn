@@ -118,7 +118,7 @@ func get_dist(area):
 
 func _on_ResetChecker_timeout():
 	if lastPos != null:
-		if  lastPos.abs() - _pos().abs() < Vector3(0.5, 0.5, 0.5):
+		if  lastPos.abs() - _pos().abs() < Vector3(0.01, 0.01, 0.01):
 			p.global_transform.origin = initialPos
 	lastPos = _pos()
 "
@@ -229,6 +229,7 @@ anims/Hit = SubResource( 7 )
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.423, 0 )
 shape = SubResource( 8 )
+
 [connection signal="timeout" from="AI/Timer" to="AI" method="_on_Timer_timeout"]
 [connection signal="timeout" from="AI/ResetChecker" to="AI" method="_on_ResetChecker_timeout"]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
