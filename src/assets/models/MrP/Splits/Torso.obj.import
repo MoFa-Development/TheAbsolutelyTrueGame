@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Torso.obj-a72fd6969448e8fd2309c466aa141203.mesh"
+
+[deps]
+
+files=[ "res://.import/Torso.obj-a72fd6969448e8fd2309c466aa141203.mesh" ]
+
+source_file="res://assets/models/MrP/Splits/Torso.obj"
+dest_files=[ "res://.import/Torso.obj-a72fd6969448e8fd2309c466aa141203.mesh", "res://.import/Torso.obj-a72fd6969448e8fd2309c466aa141203.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

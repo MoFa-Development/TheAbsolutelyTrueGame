@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Arm-R.obj-f56c906264db59ee09e81fc0401afd41.mesh"
+
+[deps]
+
+files=[ "res://.import/Arm-R.obj-f56c906264db59ee09e81fc0401afd41.mesh" ]
+
+source_file="res://assets/models/MrP/Splits/Arm-R.obj"
+dest_files=[ "res://.import/Arm-R.obj-f56c906264db59ee09e81fc0401afd41.mesh", "res://.import/Arm-R.obj-f56c906264db59ee09e81fc0401afd41.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
