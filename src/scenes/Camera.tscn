@@ -15,13 +15,13 @@ onready var goalPos = global_transform.origin.x
 func _process(delta):
 	$CanvasLayer/Label.text = str(Engine.get_frames_per_second())
 	if Input.is_action_pressed(\"ui_left\"):
-		goalPos -= 0.1/delta
+		goalPos -= 0.01/delta
 	if Input.is_action_pressed(\"ui_right\"):
-		goalPos += 0.1/delta
+		goalPos += 0.01/delta
 	if Input.is_action_pressed(\"ui_down\"):
-		global_transform.origin.z += 1
+		global_transform.origin.z += 0.1
 	if Input.is_action_pressed(\"ui_up\"):
-		global_transform.origin.z -= 1
+		global_transform.origin.z -= 0.1
 	global_transform.origin.x = lerp(global_transform.origin.x, goalPos, 0.3)
 
 	if get_viewport().get_mouse_position() != null && Input.is_action_just_pressed(\"click\"):
@@ -36,7 +36,7 @@ func _process(delta):
 		var to = from + project_ray_normal(mouse_pos) * ray_length
 		
 		var space_state = get_world().get_direct_space_state()
-		var result = space_state.intersect_ray( from, to )
+		var result = space_state.intersect_ray( from, to , [], 1)
 		
 		if result.size() > 0:
 			b.apply_impulse(Vector3(rand_range(-0.03, 0.03), rand_range(-0.03, 0.03), rand_range(-0.03, 0.03)), (result.position - b.global_transform.origin) * forceFactor)
