@@ -77,7 +77,7 @@ shape = SubResource( 3 )
 
 [node name="Back" type="StaticBody" parent="EmptyClassroom"]
 collision_layer = 514
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape6" type="CollisionShape" parent="EmptyClassroom/Back"]
 transform = Transform( -1.77636e-15, 2.98023e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, 2.98023e-08, -1.06737, -4.88933, 6.10794 )

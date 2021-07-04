@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/KGHAPPY.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://environment/Main.tres" type="Environment" id=2]
@@ -13,7 +13,7 @@ onready var goalPos = global_transform.origin.x
 
 
 func _process(delta):
-	$CanvasLayer/Label.text = str(Engine.get_frames_per_second())
+	# $CanvasLayer/Label.text = str(Engine.get_frames_per_second())
 	if Input.is_action_pressed(\"ui_left\"):
 		goalPos -= 0.01/delta
 	if Input.is_action_pressed(\"ui_right\"):
@@ -46,6 +46,17 @@ func _process(delta):
 size = 100
 font_data = ExtResource( 1 )
 
+[sub_resource type="GDScript" id=3]
+script/source = "extends Label
+
+
+func _ready():
+	Globals.connect(\"score_changed\", self, \"score_changed\")
+
+func score_changed():
+	text = \"Score: \" + str(Globals.score)
+"
+
 [node name="Camera" type="Camera"]
 transform = Transform( 0.987345, 7.47255e-05, -0.158589, 0, 1, 0.00047119, 0.158589, -0.000465227, 0.987345, -4.97291, 3.18984, 4.77936 )
 environment = ExtResource( 2 )
@@ -62,6 +73,7 @@ margin_right = 20.0
 margin_bottom = 169.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 2 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

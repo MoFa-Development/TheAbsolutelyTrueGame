@@ -28,6 +28,7 @@ points = PoolVector3Array( -0.3, -0.1, -0.4, -0.3, 0.2, 0.4, -0.3, -0.1, 0.4, -0
 "throwable",
 ]]
 transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0 )
+collision_layer = 0
 script = SubResource( 1 )
 
 [node name="book" type="MeshInstance" parent="."]
@@ -46,6 +47,7 @@ autostart = true
 
 [node name="HitTimer" type="Timer" parent="."]
 one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_Book_body_entered"]
 [connection signal="timeout" from="DieTimer" to="." method="_on_DieTimer_timeout"]
 [connection signal="timeout" from="HitTimer" to="." method="_on_HitTimer_timeout"]

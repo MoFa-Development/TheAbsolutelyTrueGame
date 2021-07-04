@@ -27,6 +27,8 @@ func _process(delta):
 	else:
 		v /= 1.1
 	if rotation_degrees.y != goalRot:
+		if abs(rotation_degrees.y - goalRot) > 180:
+			goalRot /= 10
 		rotation_degrees.y = lerp(rotation_degrees.y, goalRot, 0.05)
 		if update_walk:
 			goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * speed
@@ -57,6 +59,7 @@ func _on_Area_body_entered(body):
 		if !b.hitted:
 			if b.is_in_group(\"throwable\"):
 				$AnimationPlayer.play(\"Hit\")
+				Globals.score += 1
 
 "
 
@@ -68,14 +71,14 @@ onready var initialPos = p.global_transform.origin
 
 var lastPos
 
-var speed = 30
+var speed = 50
 
 
 func _pos() -> Vector3:
 	return p.global_transform.origin
 
 func _on_Timer_timeout():
-	p.do_move(speed, 2)
+	p.do_move(speed, 4)
 	var rot = 0
 	for area in get_children():
 		if area is Area:
@@ -118,7 +121,7 @@ func get_dist(area):
 
 func _on_ResetChecker_timeout():
 	if lastPos != null:
-		if  lastPos.abs() - _pos().abs() < Vector3(0.01, 0.01, 0.01):
+		if  lastPos.abs().distance_to(_pos().abs()) < 0.01:
 			p.global_transform.origin = initialPos
 	lastPos = _pos()
 "
@@ -184,11 +187,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783071, 0 )
 script = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="AI"]
-wait_time = 0.3
+wait_time = 0.1
 autostart = true
 
 [node name="ResetChecker" type="Timer" parent="AI"]
-wait_time = 8.0
+wait_time = 2.0
 autostart = true
 
 [node name="Front" type="Area" parent="AI"]
