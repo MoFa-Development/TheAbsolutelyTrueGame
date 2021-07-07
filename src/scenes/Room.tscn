@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/characters/MrP.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/models/Classroom/window.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/models/Classroom/window1.obj" type="ArrayMesh" id=17]
 [ext_resource path="res://scenes/characters/Sleeping_Student.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/characters/Student_1.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/UI/TitleScreen.tscn" type="PackedScene" id=20]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 15 )
@@ -37,6 +38,8 @@ albedo_texture = ExtResource( 7 )
 
 [node name="Camera" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.987345, 7.47255e-05, -0.158589, 0, 1, 0.00047119, 0.158589, -0.000465227, 0.987345, -4.97291, 3.18984, 9.49938 )
+
+[node name="TitleScreen" parent="Camera" instance=ExtResource( 20 )]
 
 [node name="EmptyClassroom" type="StaticBody" parent="."]
 

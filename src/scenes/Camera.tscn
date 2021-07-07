@@ -11,6 +11,8 @@ onready var book = preload(\"res://scenes/book.tscn\") as PackedScene
 var forceFactor = 3
 onready var goalPos = global_transform.origin.x
 
+func _ready():
+	get_tree().paused = true
 
 func _process(delta):
 	# $CanvasLayer/Label.text = str(Engine.get_frames_per_second())

@@ -60,10 +60,6 @@ func _on_Area_body_entered(body):
 		if !b.hitted:
 			if b.is_in_group(\"throwable\"):
 				$AnimationPlayer.play(\"Hit\")
-				var explode = load(\"res://scenes/effects/Explosion.tscn\").instance() as Spatial
-				add_child(explode)
-				explode.scale = Vector3(5, 5, 5)
-				explode.global_transform.origin = b.global_transform.origin
 				Globals.score += 1
 
 func _ready():
