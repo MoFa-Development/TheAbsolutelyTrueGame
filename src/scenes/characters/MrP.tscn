@@ -7,6 +7,7 @@
 script/source = "extends KinematicBody
 
 var speed = 1
+var speed_scale = 1
 var gravity = -9.81
 var fall_speed = 0
 var jump_speed = 0
@@ -31,7 +32,7 @@ func _process(delta):
 			goalRot /= 10
 		rotation_degrees.y = lerp(rotation_degrees.y, goalRot, 0.05)
 		if update_walk:
-			goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * speed
+			goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * speed * speed_scale
 	move_and_slide(v)
 	handle_collisions()
 
@@ -46,7 +47,7 @@ func handle_collisions():
 func do_move(speed, distance):
 	self.speed = speed
 	self.distance = distance
-	goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * speed
+	goalDir = global_transform.origin.direction_to($Position3D.global_transform.origin) * speed * speed_scale
 
 func do_rotate(degrees, update_walk = true):
 	goalRot = rotation_degrees.y + degrees
@@ -61,6 +62,11 @@ func _on_Area_body_entered(body):
 				$AnimationPlayer.play(\"Hit\")
 				Globals.score += 1
 
+func _ready():
+	Globals.connect(\"score_changed\", self, \"score_changed\")
+
+func score_changed():
+	speed_scale += 0.01
 "
 
 [sub_resource type="GDScript" id=2]
@@ -71,7 +77,7 @@ onready var initialPos = p.global_transform.origin
 
 var lastPos
 
-var speed = 50
+var speed = 5
 
 
 func _pos() -> Vector3:
